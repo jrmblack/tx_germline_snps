@@ -8,23 +8,6 @@ example_pt_phenotype_continuous <- c(0.1,1.1,0.5,0.5,0.2,0.8,1.2,1.0)
 example_pt_covariate_1 <- c(0,0,0,0,0,0,1,1)
 example_pt_covariate_2 <- c(-1.2,-3,0.1,5,1.2,3.1,1,0.8)
 
-# load example data
-data(SKAT.example)
-# here, y.c is continuous phenotype and y.b is binary
-# Z is genotype matrix (presumably, 2 is homozygous, 1 is heterozygous and 0 is absent)
-# X is co-variate matrix (continuous)
-attach(SKAT.example)
-
-obj<-SKAT_Null_Model(y.c ~ X, out_type="C")
-# there, out_type = C is for continuous (D for dichotomous)
-SKAT(Z, obj)$p.value
-
-# 1. Simple association testing
-# 2. Assigning weights to SNPs
-# 3. Combining burden testing and SKAT
-### This is for optimal test: 
-SKAT(Z, obj, method="SKATO")$p.value
-
 # Step 1 - need to get SNP data into homo -, het, homo + (0,1,2)
 annotation$SNP_code[annotation$vaf_gl <0.4] <- 0
 annotation$SNP_code[annotation$vaf_gl >0.6] <- 2
